@@ -125,8 +125,16 @@ function addSearchBar() {
  </label>`; 
    header.insertAdjacentHTML("beforeend", html);
    // grabs the user's input from bar to search for student in data
+
+   
    const searchBarInput = document.querySelector('#search'); 
+   const btnClick = document.querySelector('button');
+   // searches by key
    searchBarInput.addEventListener('keyup', () => {
+      searchStudent(searchBarInput);
+   });
+   // searches when button is clicked
+   btnClick.addEventListener('click', () => {
       searchStudent(searchBarInput);
    });
    
