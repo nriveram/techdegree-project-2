@@ -17,7 +17,7 @@ function showPage(list, page) {
    const end = (page * studentsPerPage);
    const studentList = document.querySelector('.student-list'); 
    studentList.innerHTML = '';
-   // creates DOM element to display student info 
+   // creates DOM element to display student info from list
    for (let i = 0; i < list.length; i++) {
       if (i >= start && i < end) {
          const html = `<li class="student-item cf">
