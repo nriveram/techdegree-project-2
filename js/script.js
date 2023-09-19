@@ -3,23 +3,15 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
+const studentsPerPage = 9; 
 /*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
 function showPage(list, page) {
-   const itemsPerPage = 9; 
-   const start = (page * itemsPerPage) - itemsPerPage;
-   const end = (page * itemsPerPage);
+  
+   const start = (page * studentsPerPage) - studentsPerPage;
+   const end = (page * studentsPerPage);
    const studentList = document.querySelector('.student-list'); 
    studentList.innerHTML = '';
 
@@ -41,44 +33,42 @@ function showPage(list, page) {
    }
 }
 
-
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 function addPagination(list) {
-   const studentsPerPage = 9;
    const numOfButtons = Math.ceil(list.length / studentsPerPage);
-   const ul = document.querySelector('.link-list'); 
-   ul.innerHTML = ''; 
+   const linkList = document.querySelector('.link-list'); 
+   linkList.innerHTML = ''; 
 
    for (let i = 1; i <= numOfButtons; i++) {
       const html = `
       <li>
         <button type="button">${i}</button>
       </li>`; 
-      ul.insertAdjacentHTML("beforeend", html);
+      linkList.insertAdjacentHTML("beforeend", html);
 
    }
 
-   /*
-   let activeButton = ul.querySelector('button')
-   activeButton.className = 'active';
-
-   ul.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON') {
-         activeButton.className = ''; 
-         e.target.className = 'active'; 
-         activeButton = e.target;
-         showPage(list, activeButton.innerHTML);
-      }
-   });
-   */
    
-   ul.querySelector("button").classList.add("active");
+   linkList.querySelector('button').className = 'active';
 
-   ul.addEventListener('click', (e) => {
-      const activeButton = ul.querySelector(".active");
+   linkList.addEventListener('click', (e) => {
+      const activeButton = linkList.querySelector('.active');
+      const buttonClicked = e.target;
+      if (buttonClicked.tagName === 'BUTTON') {
+         activeButton.className = ''; 
+         buttonClicked.className = 'active'; 
+         showPage(list, buttonClicked.innerHTML);
+      } 
+   });
+   
+   /*
+   linkList.querySelector("button").classList.add("active");
+
+   linkList.addEventListener('click', (e) => {
+      const activeButton = linkList.querySelector(".active");
       const buttonClicked = e.target.closest("button");
       if (activeButton && buttonClicked) {
          activeButton.classList.remove("active");
@@ -87,9 +77,8 @@ function addPagination(list) {
          buttonClicked.classList.add("active");
          showPage(list, buttonClicked.innerHTML);
        }
-
-
    }); 
+   */
    
 }
 
